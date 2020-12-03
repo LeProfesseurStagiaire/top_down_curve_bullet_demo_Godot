@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/soldier.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 23.627
+
+[node name="player" type="KinematicBody2D"]
+z_index = 1
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.828125, 0.828125 )
+texture = ExtResource( 2 )
+
+[node name="rotation_change" type="Tween" parent="."]
+
+[node name="slow_motion" type="Tween" parent="."]
+
+[node name="slow_motion_launch_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+[connection signal="timeout" from="slow_motion_launch_timer" to="." method="_on_slow_motion_launch_timer_timeout"]
